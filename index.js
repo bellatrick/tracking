@@ -5,12 +5,12 @@ const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const trackingRoute = require("./routes/tracking");
-
+const {MONGODB} = require('./config.js')
 dotenv.config();
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGODB, {
+  .connect(MONGODB, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
