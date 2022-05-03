@@ -6,6 +6,7 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const trackingRoute = require("./routes/tracking");
 
+const PORT = process.env.PORT || 5000;
 dotenv.config();
 app.use(express.json());
 
@@ -21,6 +22,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/tracking", trackingRoute);
 
-app.listen("5000", () => {
+app.listen({ port: PORT }, () => {
   console.log("Backend is running.");
 });
