@@ -50,7 +50,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const tracking = await Tracking.findById(req.params.id);
-    if (Tracking.username === req.body.username) {
+    if (Tracking.username === req.query.username) {
       try {
         await tracking.delete();
         res.status(200).json("Tracking has been deleted...");
