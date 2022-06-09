@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Tracking = require("../model/tracking");
-
-//CREATE tracked 
+const Log = require("../model/logs");
+//CREATE tracked
 router.post("/", async (req, res) => {
   const newTracking = new Tracking(req.body);
   try {
@@ -11,14 +11,23 @@ router.post("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//create log
+router.post("/log", async (req, res) => {
+  const newLog = new Log(req.body);
+  try {
+    const savedLog = await newLog.save();
+    res.status(200).json(savedLog);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 //UPDATE Tracking
 router.put("/:id", async (req, res) => {
   try {
     const tracking = await Tracking.findById(req.params.id);
     if (tracking.username === req.body.username) {
       try {
-        const updatedTracking = await tracking.findByIdAndUpdate(
+        const updatedTracking = await Tracking.findByIdAndUpdate(
           req.params.id,
           {
             $set: req.body,
@@ -65,7 +74,21 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//GET All logs
+router.get("/logs", async (req, res) => {
+  const username = req.query.user;
+  try {
+    let logs;
+    if (username) {
+      logs = await Log.find({ username });
+    } else {
+      logs = await Log.find();
+    }
+    res.status(200).json(logs);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 //GET ALL Trackings
 router.get("/", async (req, res) => {
   const username = req.query.user;

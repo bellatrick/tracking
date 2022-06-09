@@ -5,11 +5,10 @@ const TrackingSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-
     },
     delivery_date: {
       type: String,
-      required: true,     
+      required: true,
     },
     status: {
       type: String,
@@ -28,6 +27,10 @@ const TrackingSchema = new mongoose.Schema(
       required: false,
     },
     date_shipped: {
+      type: String,
+      required: false,
+    },
+    client_name: {
       type: String,
       required: false,
     },
