@@ -75,7 +75,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 //GET All logs
-router.get("/logs", async (req, res) => {
+router.get("/log", async (req, res) => {
   const username = req.query.user;
   try {
     let logs;
