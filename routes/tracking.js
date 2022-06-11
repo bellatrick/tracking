@@ -74,21 +74,7 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-//GET All logs
-router.get("/log", async (req, res) => {
-  const username = req.query.user;
-  try {
-    let logs;
-    if (username) {
-      logs = await Log.find({ username });
-    } else {
-      logs = await Log.find();
-    }
-    res.status(200).json(logs);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+
 //GET ALL Trackings
 router.get("/", async (req, res) => {
   const username = req.query.user;
