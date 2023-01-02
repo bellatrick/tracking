@@ -50,15 +50,12 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const tracking = await Tracking.findById(req.params.id);
-    if (tracking.username === req.query.username) {
-      try {
-        await tracking.delete();
-        res.status(200).json("Tracking has been deleted...");
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    } else {
-      res.status(401).json("You can delete only your Tracking!");
+
+    try {
+      await tracking.delete();
+      res.status(200).json("Tracking has been deleted...");
+    } catch (err) {
+      res.status(500).json(err);
     }
   } catch (err) {
     res.status(500).json(err);
@@ -71,9 +68,7 @@ router.get("/:id", async (req, res) => {
     // const tracking = await Tracking.findById(req.params.id);
     const trackingList = await Tracking.find();
     const tracking = trackingList.find(
-      (item) =>
-       item.shipping_details.tracking_code ===
-        req.params.id
+      (item) => item.shipping_details.tracking_code === req.params.id
     );
     res.status(200).json(tracking);
   } catch (err) {
