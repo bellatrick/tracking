@@ -72,8 +72,8 @@ router.get("/:id", async (req, res) => {
     const trackingList = await Tracking.find();
     const tracking = trackingList.find(
       (item) =>
-       item.shipping_details?.tracking_code.toUpperCase() ===
-        req.params.id.toUpperCase()
+       item.shipping_details.tracking_code ===
+        req.params.id
     );
     res.status(200).json(tracking);
   } catch (err) {
