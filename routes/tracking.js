@@ -68,7 +68,11 @@ router.delete("/:id", async (req, res) => {
 //GET Tracking
 router.get("/:id", async (req, res) => {
   try {
-    const tracking = await Tracking.findById(req.params.id);
+    // const tracking = await Tracking.findById(req.params.id);
+    const trackingList = Tracking.find();
+    const tracking = trackingList.find(
+      (item) => item.shipping_details.tracking_code === req.params.id
+    );
     res.status(200).json(tracking);
   } catch (err) {
     res.status(500).json(err);
