@@ -69,7 +69,7 @@ router.delete("/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     // const tracking = await Tracking.findById(req.params.id);
-    const trackingList = Tracking.find();
+    const trackingList = await Tracking.find();
     const tracking = trackingList.find(
       (item) => item.shipping_details.tracking_code === req.params.id
     );
