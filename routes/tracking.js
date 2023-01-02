@@ -75,9 +75,6 @@ router.get("/:id", async (req, res) => {
        item.shipping_details?.tracking_code.toUpperCase() ===
         req.params.id.toUpperCase()
     );
-    if (!tracking) {
-      throw new UserInputError("Sorry! Product not found");
-    }
     res.status(200).json(tracking);
   } catch (err) {
     res.status(500).json(err);
