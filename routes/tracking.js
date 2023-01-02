@@ -71,8 +71,13 @@ router.get("/:id", async (req, res) => {
     // const tracking = await Tracking.findById(req.params.id);
     const trackingList = await Tracking.find();
     const tracking = trackingList.find(
-      (item) => item.shipping_details.tracking_code === req.params.id
+      (item) =>
+        toUpperCase(item.shipping_details?.tracking_code) ===
+        toUpperCase(req.params.id)
     );
+    if (!tracking) {
+      throw new UserInputError("Sorry! Product not found");
+    }
     res.status(200).json(tracking);
   } catch (err) {
     res.status(500).json(err);
